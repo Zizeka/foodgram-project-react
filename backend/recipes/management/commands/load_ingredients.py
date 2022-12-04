@@ -7,7 +7,7 @@ from recipes.models import Ingredient
 
 class Command(BaseCommand):
     help = 'Загрузка ингредиентов в БД из .csv'
-    
+
     def handle(self, **kwargs):
         data_path = settings.BASE_DIR
         with open(
