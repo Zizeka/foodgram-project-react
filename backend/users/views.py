@@ -80,7 +80,7 @@ class UserViewSet(viewsets.ModelViewSet):
         page = self.paginate_queryset(following_users)
 
         serializer = FollowSubscriptionSerializer(
-            instance=page,
+            page,
             context={'request': request},
             many=True
         )

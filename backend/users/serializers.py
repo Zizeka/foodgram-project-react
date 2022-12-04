@@ -55,10 +55,12 @@ class RecipeImagePathSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(image_url)
 
 
-class FollowSubscriptionSerializer(serializers.ModelSerializer):    
+class FollowSubscriptionSerializer(serializers.ModelSerializer):
     recipes = serializers.SerializerMethodField(method_name='get_recipes')
-    recipes_count = serializers.SerializerMethodField(method_name='get_recipes_count')
-    is_subscribed = serializers.SerializerMethodField(method_name='get_is_subscribed')
+    recipes_count = serializers.SerializerMethodField(
+        method_name='get_recipes_count')
+    is_subscribed = serializers.SerializerMethodField(
+        method_name='get_is_subscribed')
 
     class Meta:
         model = User

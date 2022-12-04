@@ -1,18 +1,13 @@
 from django.contrib import admin
+from django.contrib.admin import display
 
-from .models import (
-    Favorite,
-    Ingredient,
-    Ingredient_list,
-    Recipe,
-    Shopping_list,
-    Tag
-)
+from .models import (Favorite, Ingredient, IngredientList,
+                     Recipe, ShoppingList, Tag)
 
 admin.site.register(Tag)
 admin.site.register(Favorite)
-admin.site.register(Ingredient_list)
-admin.site.register(Shopping_list)
+admin.site.register(IngredientList)
+admin.site.register(ShoppingList)
 
 
 @admin.register(Ingredient)
@@ -36,15 +31,13 @@ class RecipeAdmin(admin.ModelAdmin):
         'id',
         'author',
         'name',
-        'text',
-        'image',
         'quantity_favorites'
-
     )
 
-    search_fields = ('name', 'author',) 
-    list_filter = ('name', 'tags', 'author')
+    search_fields = ('name', 'author',)
+    list_filter = ('name', 'tags', 'author',)
     empty_value_display = '-пусто-'
 
+    @display(description='Количество в избранных')
     def quantity_favorites(self, obj):
         return obj.favorites.count()
