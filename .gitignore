@@ -131,6 +131,7 @@ dmypy.json
 # .idea
 .idea
 
+#статика удались
 static/
 media/
 
