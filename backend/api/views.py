@@ -99,7 +99,7 @@ def download_shopping_cart(request):
     for number, item in enumerate(ingredients):
         ingredient_list += (
             f"\n{item['ingredient__name']} - "
-            f"{item['amount']} {item['ingredient__measurement_unit']}"
+            f"{item['ingredient_amount']} {item['ingredient__measurement_unit']}"
         )
         if number < ingredients.count() - 1:
             ingredient_list += ', '

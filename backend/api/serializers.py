@@ -1,10 +1,11 @@
 from django.shortcuts import get_object_or_404
-from .fields import Base64ImageField
 from rest_framework import serializers
 
 from recipes.models import (Favorite, Ingredient, IngredientList, Recipe,
                             ShoppingList, Tag)
 from users.serializers import UserSerializer
+
+from .fields import Base64ImageField
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -108,9 +109,9 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
             'cooking_time'
         ]
 
-    def validate(self, data):
+    def validate_ingredients(self, data):
         ingredients = data
-        list = []
+        ingredients_list = []
         for ingredient in ingredients:
             quantity = ingredient['amount']
             if int(quantity) < 1:
@@ -121,7 +122,22 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError({
                    'ingredient': 'Ингредиенты должны быть уникальными!'
                 })
-            list.append(ingredient['id'])
+            ingredients_list.append(ingredient['id'])
+        return data
+
+    def validate_tags(self, data):
+        tags = data
+        if not tags:
+            raise ValidationError({
+                'tags': 'Всегда должен быть Король-Тег!'
+            })
+        tags_list = []
+        for tag in tags:
+            if tag in tags_list:
+                raise ValidationError({
+                    'tags': 'Теги должны быть уникальными'
+                })
+            tags_list.append(tag)
         return data
 
     def create_ingredients(self, ingredients, recipe):
@@ -150,7 +166,7 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
         ingredients = validated_data.pop('ingredients')
         tags = validated_data.pop('tags')
         IngredientList.objects.filter(recipe=recipe).delete()
-        self.__add_ingredients(ingredients, recipe)
+        self.create_ingredients(ingredients, recipe)
         recipe.tags.set(tags)
         return super().update(recipe, validated_data)
 
