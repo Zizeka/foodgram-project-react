@@ -1,14 +1,14 @@
 from django.db.models import Sum
-from django.shortcuts import HttpResponse, get_object_or_404
+from django.shortcuts import HttpResponse 
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.permissions import SAFE_METHODS, AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from recipes.models import (Favorite, Ingredient, IngredientList,
+from recipes.models import (Ingredient, Favorite, IngredientList,
                             Recipe, ShoppingList, Tag)
-
 from .filters import RecipeFilter
 from .paginations import LimitPagePagination
 from .permissions import IsAuthorOrAdminOrReadOnly
@@ -16,7 +16,7 @@ from .serializers import (IngredientSerializer, CreateRecipeSerializer,
                           RecipeSerializer, RecipeShortSerializer,
                           TagSerializer)
 
-
+                          
 class TagsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
@@ -98,7 +98,7 @@ def download_shopping_cart(request):
     for number, item in enumerate(ingredients):
         ingredient_list += (
             f"\n{item['ingredient__name']} - "
-            f"{item['ingredient_amount']} {item['ingredient__measurement_unit']}"
+            f"{item['quantity']} {item['ingredient__measurement_unit']}"
         )
         if number < ingredients.count() - 1:
             ingredient_list += ', '

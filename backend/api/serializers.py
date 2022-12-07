@@ -1,12 +1,10 @@
 from django.shortcuts import get_object_or_404
-from recipes.models import(Favorite, Ingredient, IngredientList, Recipe,
+from rest_framework import serializers
+
+from recipes.models import (Ingredient, Favorite, IngredientList, Recipe,
                             ShoppingList, Tag)
-
-from rest_framework import serializers   
-
-from .fields import Base64ImageField
-
 from users.serializers import UserSerializer
+from .fields import Base64ImageField
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -132,7 +130,7 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
         tags_list = []
         for tag in tags:
             if tag in tags_list:
-                raise serializers.ValidationError('Теги должны быть уникальными')
+                raise serializers.ValidationError('Нужны уникальные теги')
             tags_list.append(tag)
         return data
 
