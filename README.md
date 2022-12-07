@@ -19,3 +19,4 @@ Cоздать и активировать виртуальное окружен�
    python -m venv venv
 
 aaaaaaaaaaaaaaa
+AAAAAAAAAAAAAAAAAAAA
