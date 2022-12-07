@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404
-from recipes.models import (Favorite, Ingredient, IngredientList,  Recipe,
+from recipes.models import (Favorite, Ingredient, IngredientList, Recipe,
                             ShoppingList, Tag)
 from rest_framework import serializers
 from users.serializers import UserSerializer
+
 from .fields import Base64ImageField
 
 
