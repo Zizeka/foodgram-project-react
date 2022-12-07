@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import serializers
-
 from recipes.models import (Ingredient, Favorite, IngredientList, Recipe,
                             ShoppingList, Tag)
-from users.serializers import UserSerializer
 from .fields import Base64ImageField
+from rest_framework import serializers
 
+from users.serializers import UserSerializer
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:

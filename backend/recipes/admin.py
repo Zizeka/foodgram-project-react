@@ -4,7 +4,6 @@ from django.contrib.admin import display
 from .models import (Ingredient, IngredientList, Favorite,
                      Recipe, ShoppingList, Tag)
 
-
 admin.site.register(Tag)
 admin.site.register(Favorite)
 admin.site.register(IngredientList)

@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SETTINGS__KEY', default='any_secret_key')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -75,19 +75,19 @@ AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 
+        'NAME':
         'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 
+        'NAME':
         'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 
+        'NAME':
         'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 
+        'NAME':
         'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
