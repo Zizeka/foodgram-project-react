@@ -12,3 +12,10 @@
 Клонировать проект:
 
 https://github.com/Zizeka/foodgram-project-react.git
+
+Cоздать и активировать виртуальное окружение:
+   source env/bin/activate
+
+   python -m venv venv
+
+aaaaaaaaaaaaaaa
