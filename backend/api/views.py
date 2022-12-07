@@ -1,13 +1,13 @@
 from django.db.models import Sum
 from django.shortcuts import HttpResponse, get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from recipes.models import (Favorite, Ingredient, IngredientList,
-                            Recipe, ShoppingList, Tag)
-from rest_framework import status, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.permissions import SAFE_METHODS, AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from recipes.models import (Favorite, Ingredient, IngredientList,
+                            Recipe, ShoppingList, Tag)
 from .filters import RecipeFilter
 from .pagination import LimitPagePagination
 from .permissions import IsAuthorOrAdminOrReadOnly
@@ -35,7 +35,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     permission_classes = (IsAuthorOrAdminOrReadOnly,)
     pagination_class = LimitPagePagination
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filter_class = RecipeFilter
 
     def perform_create(self, serializer):
