@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import serializers
-from recipes.models import (Favorite, Ingredient, IngredientList, Recipe,
+from recipes.models import(Favorite, Ingredient, IngredientList, Recipe,
                             ShoppingList, Tag)
-                            
+
+from rest_framework import serializers   
+
 from .fields import Base64ImageField
 
 from users.serializers import UserSerializer
@@ -127,15 +128,11 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
     def validate_tags(self, data):
         tags = data
         if not tags:
-            raise serializers.ValidationError({
-                'tags': 'Всегда должен быть Король-Тег!'
-            })
+            raise serializers.ValidationError('Всегда должен быть Король-Тег!')
         tags_list = []
         for tag in tags:
             if tag in tags_list:
-                raise serializers.ValidationError({
-                    'tags': 'Теги должны быть уникальными'
-                })
+                raise serializers.ValidationError('Теги должны быть уникальными')
             tags_list.append(tag)
         return data
 
