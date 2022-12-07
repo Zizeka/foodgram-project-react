@@ -16,7 +16,7 @@ services:
       - db
 
   backend:
-    image: zizekaz/backend:v3
+    image: zizekaz/backend:latest
     volumes:
       - ../static/:/app/static/
       - ../media/:/app/media/recipes/

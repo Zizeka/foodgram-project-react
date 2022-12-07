@@ -41,7 +41,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/backend:v3
+          tags: ${{ secrets.DOCKER_USERNAME }}/backend:v.1
           file: backend/Dockerfile
           
   build_frontend_and_push_to_docker_hub:
