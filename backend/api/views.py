@@ -7,6 +7,8 @@ from rest_framework.filters import SearchFilter
 from rest_framework.permissions import SAFE_METHODS, AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+from recipes.models import (Favorite, Ingredient, IngredientList,
+                            Recipe, ShoppingList, Tag)
 from .filters import RecipeFilter
 from .pagination import LimitPagePagination
 from .permissions import IsAuthorOrAdminOrReadOnly
@@ -14,8 +16,6 @@ from .serializers import (CreateRecipeSerializer, IngredientSerializer,
                           FavoriteSerializer, RecipeSerializer,
                           RecipeShortSerializer, ShoppingListSerializer,
                           TagSerializer)
-from recipes.models import (Favorite, Ingredient, IngredientList,
-                            Recipe, ShoppingList, Tag)
 
 
 class TagsViewSet(viewsets.ReadOnlyModelViewSet):
